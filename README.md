@@ -17,7 +17,8 @@ For reference where to get them and how to install, please check section [Techno
 
 # How to use
 
-- To create the image we are going to provision instance in Amazon EC2 service. When building, you'll pass in **aws_access_key** and **aws_secret_key** as user variables, keeping your secret keys out of the template. You can create security credentials on [this page](https://console.aws.amazon.com/iam/home?#security_credential). An example IAM policy document can be found in the [Amazon EC2 builder docs](https://www.packer.io/docs/builders/amazon.html). **NEVER** save your credentials directly in the template file or any other repo parts.
+- To create the image we are going to provision instance in Amazon EC2 service. When building, you'll pass in **aws_access_key** and **aws_secret_key** as user variables, keeping your secret keys out of the template. You can create security credentials on [this page](https://console.aws.amazon.com/iam/home?#security_credential). . **NEVER** save your credentials directly in the template file or any other repo parts.
+
 - To download the copy of the code (*clone* in Git terminology) - go to the location of your choice (normally some place in home folder) and run in terminal:
  ```
  git clone https://github.com/Galser/kitchen-ec2.git
@@ -63,7 +64,7 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
 - Next step is to install KitchenCI, the task includes multiple steps so it is been provided in a separate section. Please follow instructions in [How to install KitchenCI](#how-to-install-kitchenci)
 
 ## How to test
-As you've finished preparing test with the last `make build` command and had [installed KitchenCI]((#how-to-install-kitchenci)) you can start running them. 
+As you've finished preparing tests with the last `make build` command and had [installed KitchenCI](#how-to-install-kitchenci) you can start running them. 
 - To prepare test VM execute :
   ```
   bundle exec kitchen converge
