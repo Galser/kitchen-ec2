@@ -37,14 +37,12 @@ export AWS_ACCESS_KEY_ID="anaccesskey"
 export AWS_SECRET_ACCESS_KEY="asecretkey"
 ```
 
-- Next step is to install KitchenCI, the task includes multiple steps so it is been provided in a separate section. Please follow instructions in [How to install KitchenCI](#how-to-install-kitchenci)
-
 - In order to prepare box image and test configuration that contains link to new image execute from the command line : 
  ```
  make build
  ```
  *Note : This will utilize [Makefile](Makefile) with all instructions that is prepared in this repo. Generally in the modern distributions, you already have make command by default, if it is missing, you will need to check you OS documentation on the instructions how to install make. Often it will just require simple one or two commands.*
- The output will start with building box (AMI) that follows with provisioning it and running KitchenCI :
+ The output will start with lines like these  :
  ```
  scripts/build.sh
  amazon-ebs output will be in this color.
@@ -62,8 +60,10 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
  ```
 - **Important NOTE** - Inside the build phase we using Packer, and Packer only builds images. It does not attempt to manage them in any way. After they're built, it is up to you to launch or destroy them as you see fit. After running the above example, **your AWS account now has an AMI associated with it. AMIs are stored in S3 by Amazon, so unless you want to be charged about $0.01 per month, you'll probably want to remove it**. Remove the AMI by first deregistering it on the [AWS AMI management page](https://console.aws.amazon.com/ec2/home?region=us-east-1#s=Images). Next, delete the associated snapshot on the [AWS snapshot management page](https://console.aws.amazon.com/ec2/home?region=us-east-1#s=Snapshots).
 
+- Next step is to install KitchenCI, the task includes multiple steps so it is been provided in a separate section. Please follow instructions in [How to install KitchenCI](#how-to-install-kitchenci)
+
 ## How to test
-As you've finished preparing test with the last `make` command you can jump to running them. 
+As you've finished preparing test with the last `make build` command and had [installed KitchenCI]((#how-to-install-kitchenci)) you can start running them. 
 - To prepare test VM execute :
   ```
   bundle exec kitchen converge
@@ -107,9 +107,10 @@ As you've finished preparing test with the last `make` command you can jump to r
   -----> Kitchen is finished. (0m6.18s)
   ```
   And as you can see from output above - 1 test finished successfully, no errors, no failures. And if you have color-enabled console there should be a green checkmark that 
-    > System package nginx - **should be installed**, 
-    e.g. we do have Nginx installed in our box.
-- To destroy the VM and free resources, run "
+    > System package nginx - **should be installed**,
+    
+  e.g. we do have Nginx installed in our box.
+- To destroy the VM and free resources, run:
     ```
     bundle exec kitchen destroy
     ```
@@ -206,21 +207,21 @@ Installing kitchen-vagrant 1.6.0
 Bundle complete! 4 Gemfile dependencies, 107 gems now installed.
 Use `bundle info [gemname]` to see where a bundled gem is installed.
 ```
-Now KitchenCI is ready for usage.
+Now KitchenCI is ready for usage, you can go back and continue with tests from [this section](#how-to-test). 
 
 # Technologies
 
 1. **To download the content of this repository** you will need **git command-line tools**(recommended) or **Git UI Client**. To install official command-line Git tools please [find here instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for various operating systems. 
 2. **This box for virtualization** uses **AWS EC2** - Amazon Elastic Compute Cloud (Amazon EC2 for short) - a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers. You can read in details and create a free try-out account if you don't have one here :  [Amazon EC2 main page](https://aws.amazon.com/ec2/) 
 3. **For creating AWS EC2 image** we need **Packer** - an open-source tool for creating identical machine images for multiple platforms from a single source configuration.  You can [download binaries for your platform here](https://www.packer.io/downloads.html)  and then [follow this installation instruction](https://www.packer.io/intro/getting-started/install.html#precompiled-binaries).  
-4. **KitchenCI** - provides a test harness to execute infrastructure code on one or more platforms in isolation. For more details please check the product site : [KitchenCI](https://kitchen.ci/)
-5. **RubyGems** is a package manager for the Ruby programming language that provides a standard format for distributing Ruby programs and libraries (in a self-contained format called a "gem"), a tool designed to easily manage the installation of gems, and a server for distributing them. More here: https://rubygems.org/
+4. **KitchenCI** - provides a test harness to execute infrastructure code on one or more platforms in isolation. For more details please check the product site : [KitchenCI](https://kitchen.ci/). There is a dedicated section in README on [How to install KitchenCI](#how-to-install-kitchenci)
 
-6. **Nginx stands apart - as it will be downloaded and installed automatically during the provision.** Nginx is an open-source HTTP Web server and reverse proxy server. In addition to offering HTTP server capabilities, Nginx can also operate as an IMAP/POP3 mail proxy server as well as function as a load balancer and HTTP cache server. You can get more information about it  - check [official website here](https://www.nginx.com)  
+# Tools that are going to be used indirectly
+
+5. **RubyGems** is a package manager for the Ruby programming language that provides a standard format for distributing Ruby programs and libraries (in a self-contained format called a "gem"), a tool designed to easily manage the installation of gems, and a server for distributing them. More here: https://rubygems.org/
+6. **Nginx** is an open-source HTTP Web server and reverse proxy server. In addition to offering HTTP server capabilities, Nginx can also operate as an IMAP/POP3 mail proxy server as well as function as a load balancer and HTTP cache server. You can get more information about it  - check [official website here](https://www.nginx.com)  
 
 # TODO
-
-- [ ] make last-minutes updates to README
 
 
 # DONE
@@ -234,3 +235,5 @@ Now KitchenCI is ready for usage.
 - [x] create makefile for end-user
 - [x] update instruction for **make part**
 - [X] update instruction for **KitchenCI part**
+- [x] make last-minutes updates to README
+
