@@ -223,7 +223,8 @@ Now KitchenCI is ready for usage, you can go back and continue with tests from [
 6. **Nginx** is an open-source HTTP Web server and reverse proxy server. In addition to offering HTTP server capabilities, Nginx can also operate as an IMAP/POP3 mail proxy server as well as function as a load balancer and HTTP cache server. You can get more information about it  - check [official website here](https://www.nginx.com)  
 
 # TODO
-
+- [ ] remove AWS CLI tools dependecy in Kitehcn tempalte generation
+- [ ] update README, put some notes really in QUOTRES or NOTES styled paragraphs
 
 # DONE
 
