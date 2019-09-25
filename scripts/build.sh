@@ -10,4 +10,26 @@ packer build -var build_uuid=${UUID} -force nginx-aws-template.json
 # grep AMI_ID from AWS CLI
 AMI_ID=$(aws ec2 describe-images --filters Name=tag:PackerBuildUUID,Values=${UUID} --output text --query 'Images[0].ImageId')
 
-echo ${AMI_ID}
+# Generate KitchenCI config
+cat > .kitchen.yml <<EOL 
+---
+driver:
+  name: ec2
+  region: eu-central-1
+
+provisioner:
+  name: shell
+
+platforms:
+  - name: ubuntu-16.04
+    driver:
+      image_id: ${AMI_ID}
+    transport:
+      username: ubuntu
+
+verifier:
+  name: inspec
+
+suites:
+  - name: default
+EOL
