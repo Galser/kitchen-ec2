@@ -7,12 +7,13 @@ Based on : https://github.com/Galser/nginx-aws-box
 # Purpose
 This repository contains the minimal code and instructions required to create an **AWS EC2** instance box with **Nginx** web server and check with **KitchenCI** that box indeed has Nginx inside.
 
-To learn more about the mentioned above tools and technologies -  please check section [Technologies near the end of the README](#technologies)
+To learn more about the mentioned above tools and technologies -  please check section [Technologies](#technologies)
 
 # Requirements
 
 You will need to have some applications installed - Packer, Git tools.
-For reference where to get them and how to install each one - please [check section](#technologies)
+For reference where to get them and how to install, please check section [Technologies](#technologies)
+
 
 # How to use
 
@@ -51,7 +52,7 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
  ==> amazon-ebs: Force Deregister flag found, skipping prevalidating AMI Name
      amazon-ebs: Found Image ID: ami-050a22b7e0cf85dd0
  ```
- Succesfull build should end up in the lines like in the exmaple below :
+ Succesfull build should end up in the lines like in the example below :
  ```
   Build 'amazon-ebs' finished.
 
@@ -114,7 +115,7 @@ As you've finished preparing test with the last `make` command you can jump to r
     ```
     Output :
     ```
------> Destroying <default-ubuntu-1604>...
+     -----> Destroying <default-ubuntu-1604>...
        Waited 0/300s for instance <i-00fba04b9422fa2a0> to terminate.
        Waited 5/300s for instance <i-00fba04b9422fa2a0> to terminate.
        Waited 10/300s for instance <i-00fba04b9422fa2a0> to terminate.
@@ -126,8 +127,10 @@ As you've finished preparing test with the last `make` command you can jump to r
        Finished destroying <default-ubuntu-1604> (0m21.22s).
        Finished testing <default-ubuntu-1604> (0m56.22s).    
     ```
+
 This concludes the instructions block, thank you.
-Once more - reminder - you could probably have now new AMIs and corresponding screenshots in Amazon AWS, please do not forget to clean them once they are not needed anymore, to avoid unnecessary charges on your account. 
+
+Once more - reminder - you could probably have now new AMIs and corresponding snapshots in Amazon AWS, **please do not forget to clean them once they are not needed anymore, to avoid unnecessary charges on your account**. 
  
  
 # How to install KitchenCI
