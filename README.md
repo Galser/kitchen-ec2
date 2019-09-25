@@ -23,28 +23,10 @@ To learn more about the mentioned above tools and technologies -  please check s
  ```
  cd kitchen-ec2
  ```
-- Now to create the AWS EC2 box with Nginx we are going to use Packer and [template](nginx-aws-template.json) with [provision scripts](scripts) provided in this repo.
-*Note: It is going to take some time, as Packer need to start instnce, wait for it to be up and running, provision and then pack everything into an AMI - format of images used in Amazon EC2*
+- To user KitchenCI we will need AWS CLI tools, please follow [instructions from here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html). Pay attention that you will need to COnfigure AWS CLI - e.g. have your access ker and secret key defined.
 
-To simplify the process we use the credentials in the command line. However, it is potentially insecure. See official  documentation for [other ways to specify Amazon credentials](https://www.packer.io/docs/builders/amazon.html#specifying-amazon-credentials).
- ```
- packer build \
-    -var 'aws_access_key=YOUR ACCESS KEY' \
-    -var 'aws_secret_key=YOUR SECRET KEY' \ 
-    nginx-aws-template.json
- ```
-And in the case of successful process completion you would see these *last lines* :
- ```
- Build 'amazon-ebs' finished.
+- As we are going to use KitchenCI to test our box, we need to prepare some secure way of passing credentials. See official documentation for [other ways to specify Amazon credentials](https://www.packer.io/docs/builders/amazon.html#specifying-amazon-credentials). For the purpose of this repo please use environment variables.  
 
- ==> Builds finished. The artifacts of successful builds are:
- --> amazon-ebs: AMIs were created:
- us-east-1: ami-05109863b0a1a6a3e
- ```
-Here - at the end of the run Packer outputs the artifacts that were created as part of the build. Artifacts are the results of a build, and typically represent an ID (such as in the case of an AMI) or a set of files (such as for a VMware virtual machine). In this example, we only have a single artifact: the AMI in us-east-1 that was created with ID  : **ami-05109863b0a1a6a3e** 
-This AMI is ready to use. If you wanted you could go and launch this AMI right now and it would work great.
-
-  > Note: Your AMI ID will surely be different than the one above. If you try to launch the one in the example output above, you will get an error. If you want to try to launch your AMI, get the ID from the **your** Packer output.
 
 - **Important NOTE** - Packer only builds images. It does not attempt to manage them in any way. After they're built, it is up to you to launch or destroy them as you see fit. After running the above example, **your AWS account now has an AMI associated with it. AMIs are stored in S3 by Amazon, so unless you want to be charged about $0.01 per month, you'll probably want to remove it**. Remove the AMI by first deregistering it on the [AWS AMI management page](https://console.aws.amazon.com/ec2/home?region=us-east-1#s=Images). Next, delete the associated snapshot on the [AWS snapshot management page](https://console.aws.amazon.com/ec2/home?region=us-east-1#s=Snapshots).
 
@@ -62,7 +44,6 @@ This AMI is ready to use. If you wanted you could go and launch this AMI right n
 6. **Nginx stands apart - as it will be downloaded and installed automatically during the provision.** Nginx is an open source HTTP Web server and reverse proxy server.In addition to offering HTTP server capabilities, Nginx can also operate as an IMAP/POP3 mail proxy server as well as function as a load balancer and HTTP cache server. You can get more information about it  - check [official website here](https://www.nginx.com)  
 
 # TODO
-- [ ] create **first KitchenCI tests**
 - [ ] tune KitchenCI test to perfom as per task
 - [ ] update instruction for **KitchenCI part**
 - [ ] create makefile for end-user
@@ -75,3 +56,4 @@ This AMI is ready to use. If you wanted you could go and launch this AMI right n
 - [x] define objectives
 - [x] create (reuse) AWS EC2 packer template
 - [x] update instructions for Packer part
+- [x] create **first KitchenCI tests**
