@@ -12,6 +12,19 @@ To learn more about the mentioned above tools and technologies -  please check s
 
 # How to use
 
+- To create image we are going to provision instance in Amazon EC2 service. When building, you'll pass in **aws_access_key** and **aws_secret_key** as user variables, keeping your secret keys out of the template. You can create security credentials on [this page](https://console.aws.amazon.com/iam/home?#security_credential). An example IAM policy document can be found in the [Amazon EC2 builder docs](https://www.packer.io/docs/builders/amazon.html). **NEVER** save your credentials directly in the template file or any other repo parts.
+- To download the copy of the code (*clone* in Git terminology) - go to the location of your choice (normally some place in home folder) and run in terminal:
+ ```
+ git clone https://github.com/Galser/kitchen-ec2.git
+ ```
+ *in case you are using alternative Git Client - please follow appropriate instruction for it and download(*clone*) [this repo](https://github.com/Galser/kitchen-ec2.git).*
+
+- Previous step should create the folder that contains a copy of repository. The default name is going to be the same as the name of repository e.g. `kitchen-ec2`. Locate and open it.
+ ```
+ cd kitchen-ec2
+ ```
+
+
 
 # Technologies
 
@@ -24,11 +37,9 @@ To learn more about the mentioned above tools and technologies -  please check s
 6. **Nginx stands apart - as it will be downloaded and installed automatically during the provision.** Nginx is an open source HTTP Web server and reverse proxy server.In addition to offering HTTP server capabilities, Nginx can also operate as an IMAP/POP3 mail proxy server as well as function as a load balancer and HTTP cache server. You can get more information about it  - check [official website here](https://www.nginx.com)  
 
 # TODO
-- [ ] define objectives
-- [ ] create (reuse) AWS EC2 packer template
-- [ ] update instrcutions
-- [ ] create first KitchenCI tests
-- [ ] tune KitchenCI test
+- [ ] update instructions for Packer part
+- [ ] create **first KitchenCI tests**
+- [ ] tune KitchenCI test to perfom as per task
 - [ ] update instruction for **KitchenCI part**
 - [ ] create makefile for end-user
 - [ ] update instruction for **make part**
@@ -37,3 +48,5 @@ To learn more about the mentioned above tools and technologies -  please check s
 # DONE
 
 - [x] initial readme
+- [x] define objectives
+- [x] create (reuse) AWS EC2 packer template
