@@ -17,7 +17,8 @@ For reference where to get them and how to install, please check section [Techno
 
 # How to use
 
-- To create the image we are going to provision instance in Amazon EC2 service. When building, you'll pass in **aws_access_key** and **aws_secret_key** as user variables, keeping your secret keys out of the template. You can create security credentials on [this page](https://console.aws.amazon.com/iam/home?#security_credential). . **NEVER** save your credentials directly in the template file or any other repo parts.
+- To create the image we are going to provision instance in Amazon EC2 service. When building, you'll pass in **aws_access_key** and **aws_secret_key** as user variables, keeping your secret keys out of the template. You can create security credentials on [this page](https://console.aws.amazon.com/iam/home?#security_credential). 
+>  Tip : *NEVER* save your credentials directly in the template file or any other repo parts.
 
 - To download the copy of the code (*clone* in Git terminology) - go to the location of your choice (normally some place in home folder) and run in terminal:
  ```
@@ -29,10 +30,9 @@ For reference where to get them and how to install, please check section [Techno
  ```
  cd kitchen-ec2
  ```
-- To use KitchenCI we will need AWS CLI tools, please follow [instructions from here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html). Pay attention that you will need to Configure AWS CLI - e.g. have your access key and secret key defined.
-
+ 
 - As we are going to use KitchenCI to test our box, we need to prepare some secure way of passing credentials. 
-You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively. Note that setting your AWS credentials using either these environment variables will override the use of AWS_SHARED_CREDENTIALS_FILE and AWS_PROFILE. To prepare your credentials execute from command line  :
+You need to provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively. Note that setting your AWS credentials using either these environment variables will override the use of AWS_SHARED_CREDENTIALS_FILE and AWS_PROFILE. To prepare your credentials execute from command line  :
 ```
 export AWS_ACCESS_KEY_ID="anaccesskey"
 export AWS_SECRET_ACCESS_KEY="asecretkey"
@@ -42,7 +42,7 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
  ```
  make build
  ```
- *Note : This will utilize [Makefile](Makefile) with all instructions that is prepared in this repo. Generally in the modern distributions, you already have make command by default, if it is missing, you will need to check you OS documentation on the instructions how to install make. Often it will just require simple one or two commands.*
+ > Note : This will utilize [Makefile](Makefile) with all instructions that is prepared in this repo. Generally in the modern distributions, you already have **make** command by default, if it is missing, you will need to check you OS documentation on the instructions how to install make. Often it will just require simple one or two commands.
  The output will start with lines like these  :
  ```
  scripts/build.sh
@@ -51,7 +51,7 @@ export AWS_SECRET_ACCESS_KEY="asecretkey"
  ==> amazon-ebs: Force Deregister flag found, skipping prevalidating AMI Name
      amazon-ebs: Found Image ID: ami-050a22b7e0cf85dd0
  ```
- Succesfull build should end up in the lines like in the example below :
+ Successful build should end up in the lines like in the example below :
  ```
   Build 'amazon-ebs' finished.
 
@@ -223,8 +223,6 @@ Now KitchenCI is ready for usage, you can go back and continue with tests from [
 6. **Nginx** is an open-source HTTP Web server and reverse proxy server. In addition to offering HTTP server capabilities, Nginx can also operate as an IMAP/POP3 mail proxy server as well as function as a load balancer and HTTP cache server. You can get more information about it  - check [official website here](https://www.nginx.com)  
 
 # TODO
-- [ ] remove AWS CLI tools dependecy in Kitehcn tempalte generation
-- [ ] update README, put some notes really in QUOTRES or NOTES styled paragraphs
 
 # DONE
 
@@ -238,4 +236,6 @@ Now KitchenCI is ready for usage, you can go back and continue with tests from [
 - [x] update instruction for **make part**
 - [X] update instruction for **KitchenCI part**
 - [x] make last-minutes updates to README
+- [x] remove AWS CLI tools dependecy in Kitehcn tempalte generation
+- [x] update README, put some notes really in QUOTES or NOTES styled paragraphs
 

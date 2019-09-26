@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
-# Script that starts Packer build, grabs AMI_ID and passes it along further
-# to be reused by tests, generate a unique identified for this build.
-# using uuidgen, as it is the one pre-0installed in systems, not uuid
-UUID=$(uuidgen)
+# Script that starts Packer build, grabs AMI_ID from manifest
+# and injects it into .kitchen.yml to be reused by tests
 
-# Pass the unique identifier to packer as a user variable
-packer build -var build_uuid=${UUID} -force nginx-aws-template.json
+# Build AMI while outputting manifest into current dir
+packer build -force nginx-aws-template.json
 
-# grep AMI_ID from AWS CLI
-AMI_ID=$(aws ec2 describe-images --filters Name=tag:PackerBuildUUID,Values=${UUID} --output text --query 'Images[0].ImageId')
+# grep AMI_ID from Pakcer's manifest
+AMI_ID=$(grep artifact_id manifest.json | grep -o -E 'ami-.{17}')
 
 # Generate KitchenCI config
-cat > .kitchen.yml <<EOL 
+cat > .kitchen.yml << EOL
 ---
 driver:
   name: ec2
@@ -32,4 +30,5 @@ verifier:
 
 suites:
   - name: default
+
 EOL
